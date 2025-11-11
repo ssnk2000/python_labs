@@ -61,3 +61,74 @@ print('Инициалы: ',init)
 print('Длина (символов): ',l)
 ```
 <img width="365" height="159" alt="Снимок экрана 2025-09-30 в 23 13 29" src="https://github.com/user-attachments/assets/1afe8bce-a723-48a3-91e0-0878dac56a2e" />
+
+
+
+--------------------------------------
+## Лабораторная работа 3
+-----
+-----
+### Задание 1
+``` python
+import re
+
+def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+    if casefold:
+        text = text.casefold()
+
+    if yo2e:
+        text = text.replace('ё', 'е')
+        text = text.replace('Ё', 'Е')
+
+    text = re.sub(r'\t\r\n', ' ', text)
+    text = re.sub(r'\s+', ' ', text).strip()
+
+    return text
+
+
+def tokenize(text: str) -> list[str]:
+    return re.findall(r'\w+(?:-\w+)*', text)
+
+
+def count_freq(tokens: list[str]) -> dict[str, int]:
+    freq = {}
+    for token in tokens:
+        if token in freq:
+            freq[token] += 1
+        else:
+            freq[token] = 1
+
+    return freq
+
+
+def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
+    sorted_freq = sorted(freq.items(), key=lambda item: (-item[1], item[0]))
+
+    return sorted_freq[:n]
+```
+<img width="691" height="528" alt="Снимок экрана 2025-11-11 в 21 21 40" src="https://github.com/user-attachments/assets/9b3b4136-2fd5-4d31-a950-325b5f701619" />
+
+
+### Задание 2
+``` python
+import sys
+from lib.text import normalize, tokenize, count_freq, top_n
+
+def main():
+    text = sys.stdin.read()
+
+    text = normalize(text=text)
+    tokens = tokenize(text=text)
+    freq = count_freq(tokens)
+    top_5 = top_n(freq, 5)
+
+    print(f"Всего слов: {len(tokens)}")
+    print(f"Уникальных слов: {len(set(tokens))}")
+    print("Топ-5:")
+    for word, count in top_5:
+        print(f"{word}:{count}")
+
+if __name__ == "__main__":
+    main()
+```
+<img width="240" height="165" alt="Снимок экрана 2025-11-11 в 21 57 33" src="https://github.com/user-attachments/assets/efa7e372-b202-46d9-9e35-bdd38040310e" />
