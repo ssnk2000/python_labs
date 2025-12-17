@@ -128,4 +128,6 @@ if __name__ == "__main__":
     print(f"Файл со списком: {csv_path}")
 ```
 <img width="385" height="88" alt="Снимок экрана 2025-12-17 в 12 38 10" src="https://github.com/user-attachments/assets/c95c35e2-922b-4845-8342-e4b1f0c11281" />
-![2025-12-17 12 38 02](https://github.com/user-attachments/assets/36021e3e-8e70-4cf2-88b0-20f862f5c4ff)
+<img width="712" height="204" alt="Снимок экрана 2025-12-17 в 12 45 51" src="https://github.com/user-attachments/assets/fa02b6fe-76cb-4573-8027-b73c49765b86" />
+
+
